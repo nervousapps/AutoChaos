@@ -396,3 +396,16 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+.vscode
+.pytest_cache
+__pycache__
+build
+openai_key.txt
+generated
+autochaos*
+base_site
+html*
+config*
+.coverage
+*.egg-info
