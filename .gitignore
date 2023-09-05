@@ -406,6 +406,6 @@ generated
 autochaos*
 base_site
 html*
-config*
+configCustom
 .coverage
 *.egg-info

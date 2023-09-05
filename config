@@ -1,0 +1,7 @@
+K8S_CTX=
+KEYFILE=
+NAMESPACE=default
+AVAILABILITY_ROUTE=http://localhost:8080/foo/hostname
+API_ROUTES="/foo/hostname /bar/hostname"
+RESOURCE_TYPE=
+GPT_VERSION=

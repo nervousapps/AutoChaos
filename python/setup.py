@@ -7,11 +7,12 @@ REQUIREMENTS = [
     "python-dotenv",
     "openai",
     "kubernetes",
+    "locust",
 ]
 
 setup(
     name="AutoChaos",
-    version="1.0-b1",
+    version="0.0.1b2",
     description="Auto injecting and analyzing chaos in systems.",
     author="nervousapps (Achille Pénet)",
     author_email="achille.penet@icloud.com",

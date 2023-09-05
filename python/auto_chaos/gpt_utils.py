@@ -3,15 +3,11 @@
 GPT utils
 \U0001F9E0
 """
-import os
 import openai
-import requests
-from typing import Tuple, List, Generator
+from typing import List, Generator
 
 
-def generate_text(
-    messages: List[str], model: str, temperature: float
-) -> Generator:
+def generate_text(messages: List[str], model: str, temperature: float) -> Generator:
     """
 
 
@@ -30,7 +26,7 @@ def generate_text(
         max_tokens=6742,
         top_p=1,
         frequency_penalty=0,
-        presence_penalty=0
+        presence_penalty=0,
     )
 
     return response

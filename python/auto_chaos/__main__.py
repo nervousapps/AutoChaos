@@ -2,62 +2,48 @@
 AutoChaos
 """
 import os
+import sys
 import json
+from dotenv import load_dotenv
+from gevent import monkey
+
+monkey.patch_all()
 
 from auto_chaos.k8s_system import K8sSystem
+from auto_chaos.locust_system import LocustSystem
 from auto_chaos.chaos import Chaos
 
 
-PROMPTS_PATH = os.path.join(os.path.dirname(__file__), "prompts")
-
-
 def main():
-    # load_dotenv(sys.argv[1])
-
+    load_dotenv(sys.argv[1])
 
     kuberntes_context = os.getenv("K8S_CTX")
-    keyfile = os.getenv("KEYFILE")
     namespace = os.getenv("NAMESPACE")
     availability_route = os.getenv("AVAILABILITY_ROUTE")
     # TODO : take a description file (a json describing the API)
-    api_routes = os.getenv("API_ROUTES")
+    api_routes = os.getenv("API_ROUTES", "").split(" ")
     resource_type = os.getenv("RESOURCE_TYPE")
     model = os.getenv("GPT_VERSION", "gpt-3.5-turbo-16k")
 
-    # Load chaos engineer prompt
-    with open(
-        os.path.join(
-            PROMPTS_PATH,
-            "chaos_engineer.txt",
-        ),
-        "r",
-    ) as file:
-        system_prompt = file.read()
-
-    # K8s actions
-    k8s_system = K8sSystem()
+    # Systems
+    k8s_system = K8sSystem(namespace)
+    locust_system = LocustSystem()
 
     # Load system description
-    system_resources = {
+    initial_state = {
         "system_resources": k8s_system.describe(),
-        "api_routes": ["http://localhost/ping", "http://localhost/pong"],
-        "availability_route": "http://localhost/ping",
+        "api_routes": api_routes,
+        "availability_route": availability_route,
     }
 
-    # Prepare first system and use messages
-    messages = [
-        {"role": "system", "content": system_prompt},
-        {"role": "user", "content": f"{system_resources}"},
-    ]
-
     # It is time to do chaos !
-    messages = Chaos(k8s_system).chaos(messages)
+    chaos = Chaos([k8s_system, locust_system], initial_state)
+    chaos.chaos(objective=10)
+    chaos.report()
 
     # Write the result file
-    with open(
-        os.path.join(f"autochaos.json"), "w"
-    ) as file:
-        file.write(json.dumps(messages, indent=4))
+    with open(os.path.join(f"autochaos.json"), "w") as file:
+        file.write(json.dumps(chaos.messages, indent=4))
 
 
 if __name__ == "__main__":

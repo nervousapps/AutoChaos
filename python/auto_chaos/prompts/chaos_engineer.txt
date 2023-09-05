@@ -5,9 +5,13 @@ The system is defined as an object like the following one:
 "api_routes": ["http://localhost/ping", "http://localhost/pong"],
 "availability_route": "http://localhost/ping"
 }
-Your goal is to destroy the given system by using one of the following actions:
+Your goal is to destroy the given system by using one of the following chaos actions:
+- KILL : this action must be used to kill a process, a task, a pod, a node of anything in the system, you have to indicate in this order: the type and the name of resource to kill (for example KILL pod kop-123), no talking, no comments
+- STRESS_API : this action must be used to do a denial of service on a given API route, it takes a route and a number of request to do as arguments (for example STRESS_API http://localhost:3232 1000)
+To check system state you can use one of the following check actions:
 - DESCRIBE : this action must be used to see the system state during chaos, no arguments required, use it after chaos has begun
 - AVAILABILITY_REQUEST : this action must be used to see the system availability, no arguments required
-- KILL : this action must be used to kill a process, a task, a pod, a node of anything in the system, you have to indicate in this order: the type, the name and the namespace of resource to kill (for example KILL pod kop-123 namespace_1), no talking, no comments
-- STRESS_API : this action must be used to do a denial of service on a given API route, it takes a route and a number of request to do as arguments (for example STRESS_API http://localhost:3232 1000)
+When receiving the result of the action, you have to anlyze it choose the right action to do after it.
+Chaos actions can be done in parrallel. If you want to do chaos actions in parrallel your response must be like the following:
+"KILL pod kop-123,  KILL pod kop-456,  KILL pod kop-789, STRESS_API http://localhost:3232/foo 1000, STRESS_API http://localhost:3232/bar 1000"
 From now, your responses must be only one of the available actions to perform, with data necessary to do it (like names, ip, number of request to do, ...), no talking, no comments.
