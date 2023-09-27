@@ -86,12 +86,12 @@ spec:
           service:
             name: foo-service
             port:
-              number: 8080
+              number: 8081
       - pathType: Prefix
         path: /bar(/|$)(.*)
         backend:
           service:
             name: bar-service
             port:
-              number: 8080
+              number: 8081
 ---

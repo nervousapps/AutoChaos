@@ -3,17 +3,20 @@
 GPT utils
 \U0001F9E0
 """
+import os
 import openai
 from typing import List, Generator
 
 
-def generate_text(messages: List[str], model: str, temperature: float) -> Generator:
+def generate_text(
+    messages: List[str], temperature: float, model: str = os.getenv("MODEL_NAME")
+) -> Generator:
     """
-
+    Generate text from a list of messages relying on OpenAI compatible API.
 
     Args:
         messages (List[str]): List of messages (system, user, assistant)
-        model (str): OpenAI model to be used
+        model (str): LLM model to be used
         temperature (float): Temperature
 
     Returns:

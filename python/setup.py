@@ -12,7 +12,7 @@ REQUIREMENTS = [
 
 setup(
     name="AutoChaos",
-    version="0.0.1b2",
+    version="0.1.0b1",
     description="Auto injecting and analyzing chaos in systems.",
     author="nervousapps (Achille Pénet)",
     author_email="achille.penet@icloud.com",

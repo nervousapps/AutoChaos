@@ -4,4 +4,6 @@ NAMESPACE=default
 AVAILABILITY_ROUTE=http://localhost:8080/foo/hostname
 API_ROUTES="/foo/hostname /bar/hostname"
 RESOURCE_TYPE=
-GPT_VERSION=
+MODEL_NAME=lunademo
+LOACAL_AI_URL=http://localhost:8080/v1
+NB_ITERATION=10
