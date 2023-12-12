@@ -5,7 +5,8 @@ Chaos module
 """
 import os
 import pprint
-import asyncio
+
+from openai.types.chat import ChatCompletionMessage
 
 from auto_chaos.gpt_utils import generate_text
 from auto_chaos.base_system import BaseSystem
@@ -18,6 +19,7 @@ class Chaos:
     """
     Here the chaos happen !
     """
+
     def __init__(self, systems: list[BaseSystem], initial_state: dict) -> None:
         # Load chaos engineer prompt
         with open(
@@ -59,7 +61,7 @@ class Chaos:
                 temperature=1,
             )
             response = response.choices[0].message
-        self.messages.append(response)
+        self.messages.append(response.dict())
 
         # Do actions in all systems
         print(f"🦹🏼‍♂️ Doing {response.content}")
@@ -75,7 +77,8 @@ class Chaos:
             self.messages.append(
                 {
                     "role": "user",
-                    "content": f"Result : {system_result}" + (f", Error: {system_error}" if system_error else ""),
+                    "content": f"Result : {system_result}"
+                    + (f", Error: {system_error}" if system_error else ""),
                 }
             )
 
@@ -107,6 +110,9 @@ class Chaos:
         # Give chaos engineer all previous actions result
         report_prompt = "Here are the results of chaos actions:"
         for message in self.messages:
+            if isinstance(message, ChatCompletionMessage):
+                report_prompt += f" {message.content}"
+                continue
             report_prompt += f" {message['content']}"
         report.append({"role": "user", "content": report_prompt})
 
@@ -116,7 +122,9 @@ class Chaos:
         )
 
         # Add chaos report to messages
-        self.messages.append({"role": "assistant", "content": response.choices[0].message.content})
+        self.messages.append(
+            {"role": "assistant", "content": response.choices[0].message.content}
+        )
 
         pp = pprint.PrettyPrinter(indent=4)
         pp.pprint(response.choices[0].message.content)

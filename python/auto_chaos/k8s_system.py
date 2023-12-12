@@ -62,7 +62,9 @@ class K8sSystem(BaseSystem):
 
         # List namespaced services or cluster scope
         if self.namespace:
-            ret = self.client.list_namespaced_service(namespace=self.namespace, watch=False)
+            ret = self.client.list_namespaced_service(
+                namespace=self.namespace, watch=False
+            )
             for i in ret.items:
                 result["services"][i.metadata.name] = {
                     "name": i.metadata.name,
@@ -104,7 +106,9 @@ class K8sSystem(BaseSystem):
                     name=resource_name, namespace=self.namespace, grace_period_seconds=0
                 )
             if resource_type == "node":
-                result = self.client.delete_node(name=resource_name, grace_period_seconds=0)
+                result = self.client.delete_node(
+                    name=resource_name, grace_period_seconds=0
+                )
             # Add result to results
             self.results.append(result.status.phase)
         except Exception as error:

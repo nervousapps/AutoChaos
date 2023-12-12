@@ -1,6 +1,6 @@
 kind delete cluster
 
-kind create cluster --config ~/Projects/AutoChaos/python/tests/kind_config.yaml
+kind create cluster --config ~/AutoChaos/python/tests/cluster_files/kind_config.yaml
 
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml
 

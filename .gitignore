@@ -411,3 +411,5 @@ configCustom
 *.egg-info
 
 docs
+
+*.csv

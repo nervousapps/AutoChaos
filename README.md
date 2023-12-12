@@ -33,6 +33,7 @@ AutoChaos
 - [Conclusion](#conclusion)
 - [:roller_coaster: Going further](#roller_coaster-going-further)
 - [:carousel_horse: Disclaimers](#carousel_horse-disclaimers)
+- [:recycle: Formatter](#recycle-formatter)
 - [:ledger: License](#ledger-license)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -50,6 +51,10 @@ AutoChaos utilizes LLM to inject controlled chaos into systems. It can simulate 
 ## :pinched_fingers: Requirements
 
 - Python 3.9 or newer (needs of [asyncio.to_thread()](https://docs.python.org/3/library/asyncio-task.html#asyncio.to_thread))
+```bash
+sudo apt update
+sudo apt install python3.xx python3.xx-dev python3.xx-venv
+```
 
 - [Open API key](https://platform.openai.com/account/api-keys), or a [LoacalAI](https://localai.io/) instance, or any other GenAI instance compatible with the openAi python package.
 
@@ -66,7 +71,7 @@ cd AutoChaos
 
 3 - A python venv is recommended, to create one, in your terminal:
 ```bash
-python3 -m venv autochaos
+python3.xx -m venv autochaos
 ```
 And enable it
 ```bash
@@ -75,7 +80,8 @@ source ./autochaos/bin/activate
 
 4 - Install AutoChaos package and dependencies by executing:
 ```bash
-pip install ./python
+pip install -r ./python/requirements.txt
+pip install ./python --no-deps
 ```
 
 ## :unicorn: OpenAI key configuration
@@ -88,10 +94,8 @@ nano ./openai_key.txt
 ```python
 if loacal_ai_url:
     # Change api url to LoacalAi one
-    openai.api_base = loacal_ai_url
+    openai.base_url = loacal_ai_url
     openai.api_key = "sx-xxx"
-    OPENAI_API_KEY = "sx-xxx"
-    os.environ['OPENAI_API_KEY'] = OPENAI_API_KEY
 else:
     # Initialize openai api_key
     with open("./openai_key.txt", "r") as file:
@@ -163,9 +167,15 @@ AutoChaos is a powerful tool for analyzing chaos in systems, providing businesse
 - do a report of the initial state of the system
 - take an objective (like : I want my system to be able to handle 10000 users)
 - take a description file (a json describing the API to automatically guess routes)
+- use a client instead of the base openai package one
+
 
 ## :carousel_horse: Disclaimers
 This is not an official OpenAI product. This is a personal project and it is not affiliated with OpenAI in any way.
+
+## :recycle: Formatter
+
+[BLACK](https://pypi.org/project/black/)
 
 ## :ledger: License
 [License MIT](./LICENSE)

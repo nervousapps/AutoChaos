@@ -56,7 +56,7 @@ class LocustSystem(BaseSystem):
                 args[0],
                 "--csv=stress",
             ],
-            #stdout=subprocess.PIPE,
+            # stdout=subprocess.PIPE,
         )
 
         # Get CSV reports

@@ -22,7 +22,7 @@ def generate_text(
     Returns:
         Generator: GPT response object
     """
-    response = openai.ChatCompletion.create(
+    response = openai.chat.completions.create(
         model=model,
         messages=messages,
         temperature=temperature,

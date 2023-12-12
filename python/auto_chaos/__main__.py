@@ -24,15 +24,13 @@ def main():
     availability_route = os.getenv("AVAILABILITY_ROUTE")
     api_routes = os.getenv("API_ROUTES", "").split(" ")
     resource_type = os.getenv("RESOURCE_TYPE")
-    local_ai_url = os.getenv("LOACAL_AI_URL")
+    local_ai_url = os.getenv("LOCAL_AI_URL")
     nb_iteration = int(os.getenv("NB_ITERATION"))
 
     if local_ai_url:
         # Change api url to LoacalAi one
-        openai.api_base = local_ai_url
+        openai.base_url = local_ai_url
         openai.api_key = "sx-xxx"
-        OPENAI_API_KEY = "sx-xxx"
-        os.environ["OPENAI_API_KEY"] = OPENAI_API_KEY
     else:
         # Initialize openai api_key
         with open("./openai_key.txt", "r") as file:
