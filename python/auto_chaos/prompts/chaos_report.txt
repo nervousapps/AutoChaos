@@ -1,6 +1,3 @@
-This is now the end of chaos.
-Forget all about the format of your response, you can now do a full report as a chaos engineer.
-You must do a report of all the chaos you made based on previous results.
+Acting as a chaos engineer, you must do a report of all the chaos based on provided results.
 Analyze all results and extract usefull datas from them.
-Add details, graphics, statistics and numbers.
-Previous results are :
+Add details, graphics, statistics and numbers to the report.

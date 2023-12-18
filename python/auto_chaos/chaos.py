@@ -64,7 +64,7 @@ class Chaos:
         self.messages.append(response.dict())
 
         # Do actions in all systems
-        print(f"🦹🏼‍♂️ Doing {response.content}")
+        print(f"🦹🏼 Doing {response.content}")
         system_result = []
         system_error = []
         for system in self.systems:
@@ -81,6 +81,8 @@ class Chaos:
                     + (f", Error: {system_error}" if system_error else ""),
                 }
             )
+            print(f"\r\r\r\r🚀 Results {system_result}")
+            print(f"\r\r\r\r😵 Errors {system_error}")
 
         # Do chaos again
         self.chaos(objective - 1)
@@ -111,14 +113,18 @@ class Chaos:
         report_prompt = "Here are the results of chaos actions:"
         for message in self.messages:
             if isinstance(message, ChatCompletionMessage):
+                if message.role != "user":
+                    continue
                 report_prompt += f" {message.content}"
+                continue
+            if message["role"] != "user":
                 continue
             report_prompt += f" {message['content']}"
         report.append({"role": "user", "content": report_prompt})
 
         # Ask chaos engineer to do a report of the chaos
         response = generate_text(
-            report, model=os.getenv("MODEL_NAME", "gpt-3.5-turbo-16k"), temperature=1.4
+            report, model=os.getenv("MODEL_NAME", "gpt-3.5-turbo-16k"), temperature=1.0
         )
 
         # Add chaos report to messages

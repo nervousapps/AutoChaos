@@ -29,14 +29,20 @@ class BaseSystem:
         # Remove quotes
         if '"' in data:
             data = data.replace('"', "")
+        if "'" in data:
+            data = data.replace("'", "")
         # Parse the string and get the action
         if "," in data:
             datas = data.split(",")
+        if "\n" in data:
+            datas = data.split('\n')
         else:
             datas = [data]
 
         # Iterate over all actions and execute them in separate threads
         for data in datas:
+            if not data:
+                continue
             if data[0] == " ":
                 data = data[1:]
             try:

@@ -8,3 +8,5 @@ kubectl wait --namespace ingress-nginx \
   --for=condition=ready pod \
   --selector=app.kubernetes.io/component=controller \
   --timeout=90s
+
+kubectl apply -f ~/AutoChaos/python/tests/cluster_files/deployment.yaml
