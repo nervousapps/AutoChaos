@@ -1,6 +1,6 @@
 K8S_CTX=
 #MODEL_NAME=lunademo
-#LOACAL_AI_URL=http://localhost:8080/v1
+#LOCAL_AI_URL=http://localhost:8080/v1
 KEYFILE=openai_key.txt
 NAMESPACE=default
 AVAILABILITY_ROUTE=http://localhost:8080/foo/hostname
