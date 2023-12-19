@@ -92,9 +92,9 @@ nano ./openai_key.txt
 
 ## :point_right: Quickstart
 ```python
-if loacal_ai_url:
-    # Change api url to LoacalAi one
-    openai.base_url = loacal_ai_url
+if local_ai_url:
+    # Change api url to LLM local tool one
+    openai.base_url = local_ai_url
     openai.api_key = "sx-xxx"
 else:
     # Initialize openai api_key
