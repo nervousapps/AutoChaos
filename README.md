@@ -2,7 +2,7 @@
 AutoChaos
 </h1>
 <h1 align="center">
-<img width="200" style="border-radius: 50%" src="https://raw.githubusercontent.com/nervousapps/AutoChaos/main/logo.png" alt="AutoChaos">
+<img width="200" style="border-radius: 100%" src="https://raw.githubusercontent.com/nervousapps/AutoChaos/main/logo.png" alt="AutoChaos">
 </h1>
 
 :warning: This README reflect the final objective of this project, not the actual state.

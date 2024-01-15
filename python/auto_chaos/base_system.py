@@ -35,7 +35,7 @@ class BaseSystem:
         if "," in data:
             datas = data.split(",")
         if "\n" in data:
-            datas = data.split('\n')
+            datas = data.split("\n")
         else:
             datas = [data]
 

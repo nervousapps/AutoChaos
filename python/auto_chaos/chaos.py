@@ -81,8 +81,8 @@ class Chaos:
                     + (f", Error: {system_error}" if system_error else ""),
                 }
             )
-            print(f"\r\r\r\r🚀 Results {system_result}")
-            print(f"\r\r\r\r😵 Errors {system_error}")
+            print(f"        🚀 Results {system_result}")
+            print(f"        😵 Errors {system_error}")
 
         # Do chaos again
         self.chaos(objective - 1)
