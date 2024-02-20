@@ -34,7 +34,7 @@ class BaseSystem:
         # Parse the string and get the action
         if "," in data:
             datas = data.split(",")
-        if "\n" in data:
+        elif "\n" in data:
             datas = data.split("\n")
         else:
             datas = [data]
