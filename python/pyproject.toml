@@ -6,39 +6,32 @@ build-backend = "setuptools.build_meta"
 name = "AutoChaos"
 version = "0.1.0b1"
 authors = [
-    {name = "nervousapps (Achille Pénet)", email = "achille.penet@icloud.com"}
+    { name = "nervousapps (Achille Pénet)", email = "achille.penet@icloud.com" },
 ]
 description = "Auto injecting and analyzing chaos in systems."
-classifiers = [
-    "License :: OSI Approved :: MIT License",
-]
+classifiers = ["License :: OSI Approved :: MIT License"]
 readme = "README.md"
-dependencies = [
-    "python-dotenv",
-    "openai",
-    "kubernetes",
-    "locust",
-]
-requires-python=">= 3.9"
+dependencies = ["python-dotenv", "openai", "kubernetes", "locust"]
+requires-python = ">= 3.9"
 
 [project.urls]
 Source = "https://github.com/nervousapps/AutoChaos"
 Documentation = "https://nervousapps.github.io/AutoChaos/auto_chaos"
 
 [project.optional-dependencies]
-test = [
-    "pytest",
-    "pytest-mock",
-    "pytest-cov",
-    "pytest-asyncio",
-]
+test = ["pytest", "pytest-mock", "pytest-cov", "pytest-asyncio"]
 doc = ["black", "pdoc"]
 
 
-[tool.setuptools.packages]
-find = {}  # Scan the project directory with the default parameters
+[tool.setuptools]
+include-package-data = true
 
+[tool.setuptools.packages.find]
+include = ['auto_chaos*']
+exclude = ['tests']
+
+[tool.setuptools.package-data]
+"auto_chaos.prompts" = ["*.txt"]
 
 [project.scripts]
 AutoChaos = "auto_chaos:main"
-
